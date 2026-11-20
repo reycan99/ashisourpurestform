@@ -13,9 +13,9 @@
   <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
 
   <style>
-    /* 1. ÖZEL GÖRSEL VE RENK TEMALARI */
+    /* TEMALAR */
 
-    /* 🌊 Ocean Dusk (Görsel 1: Alacakaranlık Dalgaları) - VARSAYILAN */
+    /* 🌊 Ocean Dusk (Varsayılan) */
     [data-theme="ocean-dusk"] {
       --bg-image: url('bg1.jpg');
       --bg-overlay: rgba(8, 6, 12, 0.68);
@@ -32,7 +32,7 @@
       --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
     }
 
-    /* 🌅 Twilight Tide (Görsel 2: Günbatımı Köpükleri) */
+    /* 🌅 Twilight Tide */
     [data-theme="ocean-tide"] {
       --bg-image: url('bg2.jpg');
       --bg-overlay: rgba(6, 8, 15, 0.65);
@@ -502,7 +502,7 @@
       color: var(--text-muted);
     }
 
-    /* ŞARKI EKLEME MODAL */
+    /* MODALLER */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -538,7 +538,7 @@
       outline: none;
     }
 
-    /* OUR SPACE KİLİT EKRANI */
+    /* ✧ DAVET KODU İLE GİRİŞ EKRANI ✧ */
     #room-lock-overlay {
       position: fixed;
       inset: 0;
@@ -557,44 +557,89 @@
       display: none;
     }
 
-    .room-box {
+    .invite-box {
       border-radius: 24px;
-      padding: 38px 28px;
-      max-width: 380px;
+      padding: 36px 26px;
+      max-width: 420px;
       width: 100%;
       text-align: center;
       box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
 
-    .room-box input {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
+    .invite-code-badge {
+      background: rgba(253, 186, 116, 0.15);
+      border: 1px dashed var(--accent);
       color: var(--accent);
-      text-align: center;
-      font-size: 1.2rem;
-      letter-spacing: 2px;
-      padding: 12px;
+      padding: 14px;
       border-radius: 14px;
-      margin: 16px 0;
-      outline: none;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      margin: 8px 0;
+      user-select: all;
     }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      margin: 4px 0;
+    }
+
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .divider::before { margin-right: 10px; }
+    .divider::after { margin-left: 10px; }
   </style>
 </head>
 <body data-theme="ocean-dusk">
 
-  <!-- 1. GİRİŞ EKRANI (our space) -->
+  <!-- 1. DAVET KODU EKRANI -->
   <div id="room-lock-overlay">
-    <div class="room-box glass">
-      <div style="font-size: 2.2rem; margin-bottom: 6px;">✧ 🗝️ ✧</div>
-      <h2 style="font-size: 1.4rem; font-weight: 500; color: var(--accent); letter-spacing: -0.03em; text-transform: lowercase;">our space</h2>
-      <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 6px; line-height: 1.4;">
-        İkinizin belirlediği ortak çift şifresini yazın.<br>
-        <small style="opacity: 0.7;">(Örn: <b>ayse-ali-2024</b>)</small>
+    <div class="invite-box glass">
+      <div style="font-size: 2.2rem; margin-bottom: 2px;">✧ 💌 ✧</div>
+      <h2 style="font-size: 1.45rem; font-weight: 500; color: var(--accent); letter-spacing: -0.03em; text-transform: lowercase;">our space</h2>
+      <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.4;">
+        Her çiftin alanı tamamen kendine özel ve şifrelidir.
       </p>
-      <input type="text" id="room-key-input" placeholder="çift-şifreniz">
-      <button class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px; border-radius: 14px;" onclick="connectRoom()">Giriş Yap ✧</button>
-      <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 14px;">Sadece ikinize özel şifreli hat.</p>
+
+      <!-- SEÇENEK 1: YENİ ALAN OLUŞTUR -->
+      <div id="create-space-view">
+        <button class="btn btn-primary" style="width: 100%; justify-content: center; padding: 13px; border-radius: 14px;" onclick="generateNewCoupleSpace()">
+          ✨ Yeni Bir Alan Oluştur
+        </button>
+      </div>
+
+      <!-- OLUŞTURULAN KOD GÖSTERİMİ -->
+      <div id="new-code-view" style="display: none; flex-direction: column; gap: 10px;">
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Senin Çift Davet Kodun:</span>
+        <div class="invite-code-badge" id="generated-code-display">LOVE-XXXX</div>
+        <button class="btn" style="width: 100%; justify-content: center; padding: 10px;" onclick="copyInviteLink()">
+          📋 Davet Linkini Kopyala & Sevgiline At
+        </button>
+        <button class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px; border-radius: 14px;" onclick="enterMyGeneratedSpace()">
+          Alanıma Gir ✧
+        </button>
+      </div>
+
+      <div class="divider">VEYA</div>
+
+      <!-- SEÇENEK 2: SEVGİLİSİNİN KODUYLA KATIL -->
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <input type="text" id="join-code-input" placeholder="Sevgilinin attığı davet kodunu yapıştır" style="background: rgba(255,255,255,0.06); border: 1px solid var(--card-border); color: var(--accent); text-align: center; font-size: 1rem; letter-spacing: 2px; padding: 12px; border-radius: 12px; outline: none;">
+        <button class="btn" style="width: 100%; justify-content: center; padding: 12px; border-radius: 12px; border-color: var(--accent); color: var(--accent);" onclick="joinExistingSpace()">
+          🗝️ Alana Katıl
+        </button>
+      </div>
     </div>
   </div>
 
@@ -614,8 +659,9 @@
         <option value="noir">🖤 Noir Indie</option>
       </select>
 
+      <button class="btn" onclick="shareSpaceCode()" title="Davet Kodunu Paylaş">💌 Kod</button>
       <button class="btn" onclick="exportData()" title="Yedek İndir">💾</button>
-      <button class="btn" onclick="changeRoomKey()" title="Çift Şifresini Değiştir">🗝️</button>
+      <button class="btn" onclick="logoutRoom()" title="Çıkış Yap">🚪 Çıkış</button>
     </div>
   </header>
 
@@ -698,14 +744,14 @@
   </div>
 
   <script>
-    // VERİ VE GERÇEK ZAMANLI SENKRONİZASYON (GUN.JS)
+    // DAVET KODU İLE BENZERSİZ KANAL SİSTEMİ
     const STORAGE_THEME = 'our_space_theme_v2';
-    const STORAGE_ROOM = 'our_space_room_v1';
-    const STORAGE_DATE = 'our_space_date_v1';
-    const STORAGE_SONG = 'our_space_song_v1';
+    const STORAGE_ACTIVE_ROOM = 'our_space_active_room_key_v2';
 
     const gun = Gun(['https://gun-manhattan.herokuapp.com/gun', 'https://relay.peer.ooo/gun']);
     let currentRoom = null;
+    let activeRoomKey = null;
+
     let loveNotes = [];
     let memories = [];
     let bucketItems = [];
@@ -719,95 +765,154 @@
     }
 
     function initTheme() {
-      // Varsayılan tema: ocean-dusk (Görsel 1)
       const saved = localStorage.getItem(STORAGE_THEME) || 'ocean-dusk';
       changeTheme(saved);
     }
 
-    // ODA BAĞLANTISI (OUR SPACE)
+    // URL PARAMETRESİNDEN SİHİRLİ LİNK KONTROLÜ (?join=LOVE-XXXX)
+    function checkUrlForInvite() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const invite = urlParams.get('join') || urlParams.get('code');
+      if (invite) {
+        const clean = invite.trim().toUpperCase();
+        localStorage.setItem(STORAGE_ACTIVE_ROOM, clean);
+        // URL'i temizle
+        window.history.replaceState({}, document.title, window.location.pathname);
+        return clean;
+      }
+      return null;
+    }
+
     function checkRoomOnLoad() {
-      const savedRoom = localStorage.getItem(STORAGE_ROOM);
-      if (savedRoom) {
+      const magicCode = checkUrlForInvite();
+      const saved = magicCode || localStorage.getItem(STORAGE_ACTIVE_ROOM);
+
+      if (saved) {
         document.getElementById('room-lock-overlay').classList.add('hidden');
-        connectToLiveRoom(savedRoom);
+        setupCoupleChannel(saved);
       } else {
         document.getElementById('room-lock-overlay').classList.remove('hidden');
       }
     }
 
-    function connectRoom() {
-      const input = document.getElementById('room-key-input').value.trim().toLowerCase();
-      if (!input || input.length < 4) {
-        alert("Lütfen en az 4 karakterli bir çift şifresi girin (Örn: ayse-ali).");
-        return;
-      }
-      localStorage.setItem(STORAGE_ROOM, input);
-      document.getElementById('room-lock-overlay').classList.add('hidden');
-      connectToLiveRoom(input);
+    // BENZERSİZ DAVET KODU ÜRETİCİ
+    let tempGeneratedCode = null;
+
+    function generateNewCoupleSpace() {
+      const rand = Math.floor(100000 + Math.random() * 900000);
+      tempGeneratedCode = 'LOVE-' + rand;
+      document.getElementById('generated-code-display').textContent = tempGeneratedCode;
+      document.getElementById('create-space-view').style.display = 'none';
+      document.getElementById('new-code-view').style.display = 'flex';
     }
 
-    function changeRoomKey() {
-      if (confirm("Çift şifrenizi değiştirmek veya başka bir odaya geçmek istiyor musunuz?")) {
-        localStorage.removeItem(STORAGE_ROOM);
+    function copyInviteLink() {
+      if (!tempGeneratedCode) return;
+      const link = `${window.location.origin}${window.location.pathname}?join=${tempGeneratedCode}`;
+      const shareText = `Bizim özel alanımız hazır ✧ Katılmak için linke tıkla:\n${link}\n(Veya kodumuz: ${tempGeneratedCode})`;
+      
+      navigator.clipboard.writeText(shareText).then(() => {
+        alert("✧ Davet linki ve kod kopyalandı! Sevgiline mesaj olarak gönderebilirsin.");
+      }).catch(() => {
+        prompt("Aşağıdaki davet mesajını kopyalayıp sevgiline atabilirsin:", shareText);
+      });
+    }
+
+    function enterMyGeneratedSpace() {
+      if (!tempGeneratedCode) return;
+      localStorage.setItem(STORAGE_ACTIVE_ROOM, tempGeneratedCode);
+      document.getElementById('room-lock-overlay').classList.add('hidden');
+      setupCoupleChannel(tempGeneratedCode);
+    }
+
+    function joinExistingSpace() {
+      const input = document.getElementById('join-code-input').value.trim().toUpperCase();
+      if (!input || input.length < 4) {
+        alert("Lütfen geçerli bir davet kodu girin (Örn: LOVE-123456).");
+        return;
+      }
+      localStorage.setItem(STORAGE_ACTIVE_ROOM, input);
+      document.getElementById('room-lock-overlay').classList.add('hidden');
+      setupCoupleChannel(input);
+    }
+
+    function shareSpaceCode() {
+      if (!activeRoomKey) return;
+      const link = `${window.location.origin}${window.location.pathname}?join=${activeRoomKey}`;
+      const msg = `Bizim alanımızın davet kodu: ${activeRoomKey}\nDoğrudan açmak için link: ${link}`;
+      navigator.clipboard.writeText(msg).then(() => {
+        alert("✧ Davet kodu ve link kopyalandı!");
+      }).catch(() => {
+        prompt("Davet kodu ve linki:", msg);
+      });
+    }
+
+    function logoutRoom() {
+      if (confirm("Bu alandan çıkış yapmak istiyor musunuz? İstediğiniz zaman aynı davet koduyla tekrar girebilirsiniz.")) {
+        localStorage.removeItem(STORAGE_ACTIVE_ROOM);
         location.reload();
       }
     }
 
-    function connectToLiveRoom(roomKey) {
-      currentRoom = gun.get('our-space-vault-' + roomKey);
+    // KANAL BAĞLANTISI (TAMAMEN BENZERSİZ KOD İLE İZOLASYON)
+    function setupCoupleChannel(roomCode) {
+      activeRoomKey = roomCode;
+      loadLocalRoomData(roomCode);
 
-      // Canlı Veri Dinleme
-      currentRoom.get('data_sync_payload').on((data) => {
+      // GunDB Benzersiz Düğümü (Asla başka çiftlerle çakışmaz)
+      currentRoom = gun.get('our_space_vault_unique_' + encodeURIComponent(roomCode));
+
+      currentRoom.get('live_payload').on((data) => {
         if (data) {
           try {
             const parsed = JSON.parse(data);
             if (parsed.loveNotes) { loveNotes = parsed.loveNotes; renderLoveNotes(); }
             if (parsed.memories) { memories = parsed.memories; renderMemories(); }
             if (parsed.bucketItems) { bucketItems = parsed.bucketItems; renderBucket(); }
-            if (parsed.currentSong) { 
-              currentSong = parsed.currentSong; 
-              updateSongBar(); 
-            }
+            if (parsed.currentSong) { currentSong = parsed.currentSong; updateSongBar(); }
             if (parsed.anniversaryDate) { 
-              localStorage.setItem(STORAGE_DATE, parsed.anniversaryDate); 
+              localStorage.setItem('anniversary_' + activeRoomKey, parsed.anniversaryDate); 
               updateCounterDisplay(parsed.anniversaryDate); 
             }
+            saveLocalRoomData(activeRoomKey);
           } catch (e) {}
         }
       });
-
-      loadLocalData();
     }
 
     function syncToCloud() {
-      if (!currentRoom) return;
+      if (!currentRoom || !activeRoomKey) return;
+      const anniversary = localStorage.getItem('anniversary_' + activeRoomKey) || '';
       const payload = JSON.stringify({
         loveNotes,
         memories,
         bucketItems,
         currentSong,
-        anniversaryDate: localStorage.getItem(STORAGE_DATE) || '2024-01-01'
+        anniversaryDate: anniversary
       });
-      currentRoom.get('data_sync_payload').put(payload);
-      saveLocalData();
+      currentRoom.get('live_payload').put(payload);
+      saveLocalRoomData(activeRoomKey);
     }
 
-    function saveLocalData() {
-      localStorage.setItem('our_space_love', JSON.stringify(loveNotes));
-      localStorage.setItem('our_space_memories', JSON.stringify(memories));
-      localStorage.setItem('our_space_bucket', JSON.stringify(bucketItems));
-      localStorage.setItem('our_space_song', JSON.stringify(currentSong));
+    function saveLocalRoomData(roomKey) {
+      localStorage.setItem('love_' + roomKey, JSON.stringify(loveNotes));
+      localStorage.setItem('memories_' + roomKey, JSON.stringify(memories));
+      localStorage.setItem('bucket_' + roomKey, JSON.stringify(bucketItems));
+      localStorage.setItem('song_' + roomKey, JSON.stringify(currentSong));
     }
 
-    function loadLocalData() {
-      loveNotes = JSON.parse(localStorage.getItem('our_space_love') || '[]');
-      memories = JSON.parse(localStorage.getItem('our_space_memories') || '[]');
-      bucketItems = JSON.parse(localStorage.getItem('our_space_bucket') || '[]');
-      currentSong = JSON.parse(localStorage.getItem('our_space_song') || '{"title":"","url":"","who":""}');
+    function loadLocalRoomData(roomKey) {
+      loveNotes = JSON.parse(localStorage.getItem('love_' + roomKey) || '[]');
+      memories = JSON.parse(localStorage.getItem('memories_' + roomKey) || '[]');
+      bucketItems = JSON.parse(localStorage.getItem('bucket_' + roomKey) || '[]');
+      currentSong = JSON.parse(localStorage.getItem('song_' + roomKey) || '{"title":"","url":"","who":""}');
+      const anniversary = localStorage.getItem('anniversary_' + roomKey) || '';
+
       renderLoveNotes();
       renderMemories();
       renderBucket();
       updateSongBar();
+      updateCounterDisplay(anniversary);
     }
 
     // SEKMELER
@@ -962,7 +1067,7 @@
       `).join('');
     }
 
-    // 🎵 GÜNÜN ŞARKISI MODAL & OYNATICI
+    // 🎵 GÜNÜN ŞARKI OYNATICISI
     function openSongModal() {
       document.getElementById('modal-song-name').value = currentSong.title || '';
       document.getElementById('modal-song-who').value = currentSong.who || '';
@@ -1030,10 +1135,12 @@
     }
 
     function setAnniversaryDate() {
-      const current = localStorage.getItem(STORAGE_DATE) || '2024-01-01';
-      const newDate = prompt("İlişkinizin başlangıç tarihini girin (Yıl-Ay-Gün formatında, Örn: 2023-08-15):", current);
+      const current = (activeRoomKey ? localStorage.getItem('anniversary_' + activeRoomKey) : '') || '2024-01-01';
+      const newDate = prompt("İlişkinizin başlangıç tarihini girin (Yıl-Ay-Gün, Örn: 2023-08-15):", current);
       if (newDate && !isNaN(Date.parse(newDate))) {
-        localStorage.setItem(STORAGE_DATE, newDate);
+        if (activeRoomKey) {
+          localStorage.setItem('anniversary_' + activeRoomKey, newDate);
+        }
         updateCounterDisplay(newDate);
         syncToCloud();
       }
@@ -1041,11 +1148,18 @@
 
     // YEDEK
     function exportData() {
-      const b = { loveNotes, memories, bucketItems, currentSong, date: localStorage.getItem(STORAGE_DATE) };
+      const b = { 
+        room: activeRoomKey, 
+        loveNotes, 
+        memories, 
+        bucketItems, 
+        currentSong, 
+        date: activeRoomKey ? localStorage.getItem('anniversary_' + activeRoomKey) : '' 
+      };
       const blob = new Blob([JSON.stringify(b, null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `our_space_backup_${Date.now()}.json`;
+      a.download = `our_space_${activeRoomKey || 'backup'}_${Date.now()}.json`;
       a.click();
     }
 
@@ -1058,7 +1172,6 @@
     // BAŞLAT
     initTheme();
     checkRoomOnLoad();
-    updateCounterDisplay(localStorage.getItem(STORAGE_DATE) || '2024-01-01');
     document.getElementById('memory-date-input').valueAsDate = new Date();
   </script>
 </body>

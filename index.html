@@ -557,15 +557,17 @@
     // ═══════════════════════════════════════════
     // DAVET LİNKİ (WhatsApp Magic Link)
     // ═══════════════════════════════════════════
+    const SITE_URL = 'https://ashisourpurestform.vercel.app';
+
     function copyInviteLink() {
       const code = tempCode || activeRoomKey;
       const pin  = tempPin  || activePin || localStorage.getItem(STORAGE_ACTIVE_PIN) || '';
       if (!code) return;
       const pinParam = pin ? `&pin=${encodeURIComponent(pin)}` : '';
-      const link = `${location.origin}${location.pathname}?join=${encodeURIComponent(code)}${pinParam}`;
-      const msg  = `Bizim özel alanımız hazır ✧ Tıkla ve doğrudan gir:\n${link}`;
+      const link = `${SITE_URL}/?join=${encodeURIComponent(code)}${pinParam}`;
+      const msg  = `Bizim özel alanımız hazır ✧\nTıkla ve doğrudan gir:\n${link}`;
       navigator.clipboard.writeText(msg)
-        .then(() => alert('✧ WhatsApp davet linki kopyalandı! Sevgiline gönder — tıkladığında şifre girmeden tek tıkla açılır.'))
+        .then(() => alert('✧ WhatsApp davet linki kopyalandı!\nSevgiline gönder — tıkladığında şifre girmeden tek tıkla açılır.'))
         .catch(() => prompt('Davet linkini kopyalayıp sevgiline atabilirsin:', msg));
     }
 
@@ -573,7 +575,7 @@
       if (!activeRoomKey) return;
       const pin  = activePin || localStorage.getItem(STORAGE_ACTIVE_PIN) || '';
       const pinParam = pin ? `&pin=${encodeURIComponent(pin)}` : '';
-      const link = `${location.origin}${location.pathname}?join=${encodeURIComponent(activeRoomKey)}${pinParam}`;
+      const link = `${SITE_URL}/?join=${encodeURIComponent(activeRoomKey)}${pinParam}`;
       navigator.clipboard.writeText(`Bizim özel alanımız:\n${link}`)
         .then(() => alert('✧ Davet linki kopyalandı!'))
         .catch(() => prompt('Davet linkiniz:', link));

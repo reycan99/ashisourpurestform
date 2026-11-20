@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
@@ -7,10 +7,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="our space">
-  <title>âœ§ our space âœ§</title>
+  <title>✧ our space ✧</title>
   <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
   <style>
-    /* â•â•â• TEMALAR â•â•â• */
+    /* ═══ TEMALAR ═══ */
     [data-theme="ocean-dusk"] {
       --bg-image: url('bg1.jpg'); --bg-overlay: rgba(8,6,12,0.68);
       --card-bg: rgba(18,14,24,0.72); --card-border: rgba(251,146,60,0.22);
@@ -130,7 +130,7 @@
     .bucket-item input[type="checkbox"] { width: 19px; height: 19px; accent-color: var(--accent); cursor: pointer; }
     .bucket-item.completed span { text-decoration: line-through; color: var(--text-muted); opacity: 0.5; }
 
-    /* SAYAÃ‡ */
+    /* SAYAÇ */
     #subtle-counter-box { position: fixed; bottom: 80px; left: 18px; z-index: 40; display: flex;
       flex-direction: column; align-items: flex-start; gap: 2px; cursor: pointer; user-select: none;
       padding: 6px 12px; border-radius: 12px; background: rgba(12,8,16,0.75); border: 1px solid var(--card-border);
@@ -138,7 +138,7 @@
     .counter-symbol { font-size: 0.85rem; color: var(--accent); text-shadow: 0 0 8px var(--accent-glow); }
     .counter-text { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.03em; }
 
-    /* ÅARKI BARI */
+    /* ŞARKI BARI */
     #floating-song-bar { position: fixed; bottom: 16px; left: 0; right: 0; margin: 0 16px; z-index: 40;
       max-width: 860px; width: calc(100% - 32px); margin-left: auto; margin-right: auto;
       border-radius: 16px; padding: 10px 16px; display: flex; align-items: center;
@@ -158,7 +158,7 @@
     .modal input, .modal textarea { background: rgba(255,255,255,0.05); border: 1px solid var(--card-border);
       color: var(--text); padding: 12px 16px; border-radius: 12px; font-size: 0.95rem; outline: none; width: 100%; }
 
-    /* GÄ°RÄ°Å EKRANI */
+    /* GİRİŞ EKRANI */
     #room-lock-overlay { position: fixed; inset: 0; background-color: #07070a;
       background-image: linear-gradient(rgba(6,4,10,0.8),rgba(6,4,10,0.8)), url('bg1.jpg');
       background-size: cover; background-position: center; z-index: 9999;
@@ -173,7 +173,7 @@
       color: var(--text); font-size: 0.95rem; padding: 11px 14px; border-radius: 12px; outline: none; }
     .auth-label { font-size: 0.72rem; color: var(--text-muted); display: block; margin-bottom: 4px; text-align: left; }
 
-    /* ÅARKI Ã–NERÄ° EMBED */
+    /* ŞARKI ÖNERİ EMBED */
     .song-embed-container { margin-top: 8px; border-radius: 12px; overflow: hidden; }
     .song-embed-container iframe { border: none; border-radius: 12px; }
 
@@ -184,109 +184,109 @@
 </head>
 <body data-theme="ocean-dusk">
 
-  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       GÄ°RÄ°Å EKRANI - Kod + Åifre KorumasÄ±
-  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <!-- ════════════════════════════════════════
+       GİRİŞ EKRANI - Kod + Şifre Koruması
+  ════════════════════════════════════════ -->
   <div id="room-lock-overlay">
     <div class="invite-box glass">
-      <div style="font-size: 2rem;">âœ§ ğŸ’Œ âœ§</div>
+      <div style="font-size: 2rem;">✧ 💌 ✧</div>
       <h2 style="font-size: 1.35rem; font-weight: 500; color: var(--accent); letter-spacing: -0.03em; text-transform: lowercase;">our space</h2>
-      <p style="color: var(--text-muted); font-size: 0.8rem; line-height: 1.4;">Her Ã§iftin alanÄ± kendine Ã¶zel ve ÅŸifrelidir.</p>
+      <p style="color: var(--text-muted); font-size: 0.8rem; line-height: 1.4;">Her çiftin alanı kendine özel ve şifrelidir.</p>
 
-      <!-- Tab seÃ§ici -->
+      <!-- Tab seçici -->
       <div style="display: flex; gap: 5px; background: rgba(255,255,255,0.05); padding: 4px; border-radius: 14px;">
-        <button id="tab-btn-create" class="btn" style="flex:1;justify-content:center;font-size:0.78rem;background:var(--accent);color:#08060c;border-radius:10px;font-weight:600;" onclick="showAuthTab('create')">âœ¨ Alan OluÅŸtur</button>
-        <button id="tab-btn-join"   class="btn" style="flex:1;justify-content:center;font-size:0.78rem;background:transparent;color:var(--text-muted);border-radius:10px;" onclick="showAuthTab('join')">ğŸ—ï¸ Alana Gir</button>
+        <button id="tab-btn-create" class="btn" style="flex:1;justify-content:center;font-size:0.78rem;background:var(--accent);color:#08060c;border-radius:10px;font-weight:600;" onclick="showAuthTab('create')">✨ Alan Oluştur</button>
+        <button id="tab-btn-join"   class="btn" style="flex:1;justify-content:center;font-size:0.78rem;background:transparent;color:var(--text-muted);border-radius:10px;" onclick="showAuthTab('join')">🗝️ Alana Gir</button>
       </div>
 
-      <!-- ALAN OLUÅTUR -->
+      <!-- ALAN OLUŞTUR -->
       <div id="auth-create-section" style="display:flex;flex-direction:column;gap:9px;text-align:left;">
         <div>
-          <label class="auth-label">Ä°kinize Ã¶zel bir kod veya tarih:</label>
-          <input id="create-room-code" class="auth-input" type="text" placeholder="Ã–rn: 50119 veya Ã¶zel bir kelime" style="color:var(--accent);font-weight:600;letter-spacing:1px;"
+          <label class="auth-label">İkinize özel bir kod veya tarih:</label>
+          <input id="create-room-code" class="auth-input" type="text" placeholder="Örn: 50119 veya özel bir kelime" style="color:var(--accent);font-weight:600;letter-spacing:1px;"
             onkeydown="if(event.key==='Enter'){document.getElementById('create-room-pin').focus();}">
         </div>
         <div>
-          <label class="auth-label">Gizli ÅŸifreniz (sadece ikiniz bilin):</label>
-          <input id="create-room-pin" class="auth-input" type="password" placeholder="Åifrenizi belirleyin"
+          <label class="auth-label">Gizli şifreniz (sadece ikiniz bilin):</label>
+          <input id="create-room-pin" class="auth-input" type="password" placeholder="Şifrenizi belirleyin"
             onkeydown="if(event.key==='Enter'){createProtectedRoom();}">
         </div>
         <button id="btn-create-submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;border-radius:12px;margin-top:2px;" onclick="createProtectedRoom()">
-          AlanÄ± OluÅŸtur ve Kilitle âœ§
+          Alanı Oluştur ve Kilitle ✧
         </button>
         <div style="text-align:center;">
-          <span style="font-size:0.7rem;color:var(--text-muted);cursor:pointer;text-decoration:underline;" onclick="generateRandomCode()">ğŸ² Rastgele kod Ã¼ret</span>
+          <span style="font-size:0.7rem;color:var(--text-muted);cursor:pointer;text-decoration:underline;" onclick="generateRandomCode()">🎲 Rastgele kod üret</span>
         </div>
       </div>
 
-      <!-- BAÅARIYLA OLUÅTURULDU -->
+      <!-- BAŞARIYLA OLUŞTURULDU -->
       <div id="auth-success-section" style="display:none;flex-direction:column;gap:10px;">
-        <span style="font-size:0.78rem;color:var(--text-muted);">Ã–zel alanÄ±nÄ±z oluÅŸturuldu ve kilitlendi:</span>
+        <span style="font-size:0.78rem;color:var(--text-muted);">Özel alanınız oluşturuldu ve kilitlendi:</span>
         <div class="invite-code-badge" id="created-code-display"></div>
         <button class="btn" style="width:100%;justify-content:center;padding:11px;border-color:var(--accent);color:var(--accent);" onclick="copyInviteLink()">
-          ğŸ“‹ WhatsApp Davet Linkini Kopyala
+          📋 WhatsApp Davet Linkini Kopyala
         </button>
         <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;border-radius:14px;" onclick="enterNewRoom()">
-          AlanÄ±ma Gir âœ§
+          Alanıma Gir ✧
         </button>
       </div>
 
-      <!-- ALANA GÄ°R -->
+      <!-- ALANA GİR -->
       <div id="auth-join-section" style="display:none;flex-direction:column;gap:9px;text-align:left;">
         <div>
           <label class="auth-label">Alan kodu:</label>
-          <input id="join-room-code" class="auth-input" type="text" placeholder="Ã–rn: 50119" style="color:var(--accent);font-weight:600;letter-spacing:1px;"
+          <input id="join-room-code" class="auth-input" type="text" placeholder="Örn: 50119" style="color:var(--accent);font-weight:600;letter-spacing:1px;"
             onkeydown="if(event.key==='Enter'){document.getElementById('join-room-pin').focus();}">
         </div>
         <div>
-          <label class="auth-label">Gizli ÅŸifre:</label>
-          <input id="join-room-pin" class="auth-input" type="password" placeholder="Åifrenizi girin"
+          <label class="auth-label">Gizli şifre:</label>
+          <input id="join-room-pin" class="auth-input" type="password" placeholder="Şifrenizi girin"
             onkeydown="if(event.key==='Enter'){joinProtectedRoom();}">
         </div>
         <button id="btn-join-submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:12px;border-radius:12px;margin-top:2px;" onclick="joinProtectedRoom()">
-          ğŸ—ï¸ Alana Gir âœ§
+          🗝️ Alana Gir ✧
         </button>
       </div>
     </div>
   </div>
 
-  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• HEADER â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <!-- ════════════════════════ HEADER ════════════════════════ -->
   <header>
     <div class="brand">
-      <span class="brand-glow">âœ§</span>
+      <span class="brand-glow">✧</span>
       <span>our space</span>
     </div>
     <div class="header-actions">
       <select id="theme-selector" class="theme-select" onchange="changeTheme(this.value)">
-        <option value="ocean-dusk">ğŸŒŠ Ocean Dusk</option>
-        <option value="ocean-tide">ğŸŒ… Twilight Tide</option>
-        <option value="bordeaux">ğŸ· Bordeaux</option>
-        <option value="midnight">ğŸŒŒ Midnight</option>
-        <option value="matcha">ğŸŒ¿ Matcha</option>
-        <option value="noir">ğŸ–¤ Noir</option>
+        <option value="ocean-dusk">🌊 Ocean Dusk</option>
+        <option value="ocean-tide">🌅 Twilight Tide</option>
+        <option value="bordeaux">🍷 Bordeaux</option>
+        <option value="midnight">🌌 Midnight</option>
+        <option value="matcha">🌿 Matcha</option>
+        <option value="noir">🖤 Noir</option>
       </select>
-      <button class="btn" onclick="shareSpaceCode()" title="Davet Linkini PaylaÅŸ">ğŸ’Œ Davet</button>
-      <button class="btn" onclick="exportData()" title="Yedek Ä°ndir">ğŸ’¾</button>
-      <button class="btn" onclick="logoutRoom()" title="Ã‡Ä±kÄ±ÅŸ Yap">ğŸšª</button>
+      <button class="btn" onclick="shareSpaceCode()" title="Davet Linkini Paylaş">💌 Davet</button>
+      <button class="btn" onclick="exportData()" title="Yedek İndir">💾</button>
+      <button class="btn" onclick="logoutRoom()" title="Çıkış Yap">🚪</button>
     </div>
   </header>
 
-  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• ANA Ä°Ã‡ERÄ°K â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <!-- ════════════════════════ ANA İÇERİK ════════════════════════ -->
   <div class="container">
     <div class="tabs-bar">
-      <button class="pill-tab active" onclick="switchTab('notes')">ğŸ’Œ Sana Notum (<span id="love-count">0</span>)</button>
-      <button class="pill-tab" onclick="switchTab('memories')">ğŸ“¸ AnÄ±larÄ±mÄ±z (<span id="memory-count">0</span>)</button>
-      <button class="pill-tab" onclick="switchTab('bucket')">ğŸ¬ Birlikte YapÄ±lacaklar (<span id="bucket-count">0</span>)</button>
+      <button class="pill-tab active" onclick="switchTab('notes')">💌 Sana Notum (<span id="love-count">0</span>)</button>
+      <button class="pill-tab" onclick="switchTab('memories')">📸 Anılarımız (<span id="memory-count">0</span>)</button>
+      <button class="pill-tab" onclick="switchTab('bucket')">🎬 Birlikte Yapılacaklar (<span id="bucket-count">0</span>)</button>
     </div>
 
     <!-- 1. SANA NOTUM -->
     <div id="notes-tab" class="tab-content active">
       <div class="note-compose-box glass">
-        <textarea id="love-note-text" rows="3" placeholder="Ona gÃ¼nÃ¼n sÃ¼rpriz mesajÄ±nÄ±, iÃ§inden geÃ§en bir hissi ya da tatlÄ± bir not bÄ±rak..."
+        <textarea id="love-note-text" rows="3" placeholder="Ona günün sürpriz mesajını, içinden geçen bir hissi ya da tatlı bir not bırak..."
           onkeydown="if(event.ctrlKey&&event.key==='Enter')addLoveNote();"></textarea>
         <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.05);padding-top:12px;flex-wrap:wrap;gap:8px;">
-          <button class="btn" onclick="openSongModal()">ğŸµ GÃ¼nÃ¼n ÅarkÄ±sÄ±nÄ± Ã–ner</button>
-          <button class="btn btn-primary" onclick="addLoveNote()">Notu BÄ±rak ğŸ’Œ</button>
+          <button class="btn" onclick="openSongModal()">🎵 Günün Şarkısını Öner</button>
+          <button class="btn btn-primary" onclick="addLoveNote()">Notu Bırak 💌</button>
         </div>
       </div>
       <div class="notes-grid" id="love-notes-container"></div>
@@ -295,67 +295,67 @@
     <!-- 2. ANILARIMIZ -->
     <div id="memories-tab" class="tab-content">
       <div class="memory-creator glass">
-        <input type="text" id="memory-title-input" class="memory-input-title" placeholder="AnÄ±mÄ±zÄ±n BaÅŸlÄ±ÄŸÄ± (Ã–rn: Ä°lk Kahve, Sahil YÃ¼rÃ¼yÃ¼ÅŸÃ¼...)">
-        <textarea id="memory-body-input" class="memory-input-body" rows="3" placeholder="O gÃ¼n nasÄ±ldÄ±, ne hissettik?"></textarea>
+        <input type="text" id="memory-title-input" class="memory-input-title" placeholder="Anımızın Başlığı (Örn: İlk Kahve, Sahil Yürüyüşü...)">
+        <textarea id="memory-body-input" class="memory-input-body" rows="3" placeholder="O gün nasıldı, ne hissettik?"></textarea>
         <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.05);padding-top:12px;flex-wrap:wrap;gap:10px;">
           <input type="date" id="memory-date-input" style="background:rgba(255,255,255,0.04);border:1px solid var(--card-border);color:var(--text);padding:6px 12px;border-radius:12px;outline:none;font-size:0.8rem;">
-          <button class="btn btn-primary" onclick="addMemory()">AnÄ±yÄ± Kaydet âœ§</button>
+          <button class="btn btn-primary" onclick="addMemory()">Anıyı Kaydet ✧</button>
         </div>
       </div>
       <div id="memories-container"></div>
     </div>
 
-    <!-- 3. BÄ°RLÄ°KTE YAPILACAKLAR -->
+    <!-- 3. BİRLİKTE YAPILACAKLAR -->
     <div id="bucket-tab" class="tab-content">
       <div class="bucket-creator">
-        <input type="text" id="new-bucket-text" placeholder="Birlikte yapÄ±lacak bir ÅŸey ekle..." onkeypress="if(event.key==='Enter')addBucketItem()">
+        <input type="text" id="new-bucket-text" placeholder="Birlikte yapılacak bir şey ekle..." onkeypress="if(event.key==='Enter')addBucketItem()">
         <button class="btn btn-primary" onclick="addBucketItem()">Ekle</button>
       </div>
       <div id="bucket-container"></div>
     </div>
   </div>
 
-  <!-- SAYAÃ‡ -->
-  <div id="subtle-counter-box" onclick="setAnniversaryDate()" title="Tarihi ayarlamak iÃ§in tÄ±kla">
-    <span class="counter-symbol">âœ§</span>
-    <span class="counter-text" id="counter-days">tarih seÃ§</span>
+  <!-- SAYAÇ -->
+  <div id="subtle-counter-box" onclick="setAnniversaryDate()" title="Tarihi ayarlamak için tıkla">
+    <span class="counter-symbol">✧</span>
+    <span class="counter-text" id="counter-days">tarih seç</span>
   </div>
 
-  <!-- ÅARKI BARI -->
+  <!-- ŞARKI BARI -->
   <div id="floating-song-bar" class="glass">
     <div class="song-info">
-      <span class="vinyl-icon">ğŸ’¿</span>
+      <span class="vinyl-icon">💿</span>
       <div style="overflow:hidden;">
-        <div class="song-title-text" id="bar-song-title">HenÃ¼z bir ÅŸarkÄ± Ã¶nerilmedi</div>
-        <div class="song-sub-text" id="bar-song-sub">GÃ¼nÃ¼n ÅŸarkÄ±sÄ±nÄ± belirlemek iÃ§in tÄ±kla</div>
+        <div class="song-title-text" id="bar-song-title">Henüz bir şarkı önerilmedi</div>
+        <div class="song-sub-text" id="bar-song-sub">Günün şarkısını belirlemek için tıkla</div>
       </div>
     </div>
     <div style="display:flex;gap:6px;align-items:center;">
-      <button class="btn" style="padding:6px 10px;font-size:0.75rem;" onclick="openSongModal()">ğŸµ</button>
-      <a id="song-listen-btn" class="btn btn-primary" style="padding:6px 10px;font-size:0.75rem;text-decoration:none;display:none;" target="_blank" rel="noopener">â–¶ Dinle</a>
+      <button class="btn" style="padding:6px 10px;font-size:0.75rem;" onclick="openSongModal()">🎵</button>
+      <a id="song-listen-btn" class="btn btn-primary" style="padding:6px 10px;font-size:0.75rem;text-decoration:none;display:none;" target="_blank" rel="noopener">▶ Dinle</a>
     </div>
   </div>
 
-  <!-- ÅARKI Ã–NERÄ° MODALI -->
+  <!-- ŞARKI ÖNERİ MODALI -->
   <div class="modal-overlay" id="song-modal">
     <div class="modal glass">
-      <h3 style="color:var(--accent);font-size:1.1rem;">ğŸµ GÃ¼nÃ¼n ÅarkÄ±sÄ±nÄ± Ã–ner</h3>
-      <p style="color:var(--text-muted);font-size:0.83rem;">ÅarkÄ± adÄ±, Spotify veya YouTube linki yapÄ±ÅŸtÄ±rabilirsin.</p>
+      <h3 style="color:var(--accent);font-size:1.1rem;">🎵 Günün Şarkısını Öner</h3>
+      <p style="color:var(--text-muted);font-size:0.83rem;">Şarkı adı, Spotify veya YouTube linki yapıştırabilirsin.</p>
       <input type="text" id="modal-song-name" placeholder="Duman - Koyu Antoloji veya Spotify/YouTube linki...">
-      <input type="text" id="modal-song-who" placeholder="Ã–neren isim (Ã–rn: Reycan)">
-      <!-- Ã–nizleme alanÄ± -->
+      <input type="text" id="modal-song-who" placeholder="Öneren isim (Örn: Reycan)">
+      <!-- Önizleme alanı -->
       <div id="song-preview-container" style="display:none;" class="song-embed-container"></div>
       <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px;">
-        <button class="btn" onclick="closeSongModal()">VazgeÃ§</button>
-        <button class="btn btn-primary" onclick="saveSongSuggestion()">ÅarkÄ±yÄ± Kaydet âœ§</button>
+        <button class="btn" onclick="closeSongModal()">Vazgeç</button>
+        <button class="btn btn-primary" onclick="saveSongSuggestion()">Şarkıyı Kaydet ✧</button>
       </div>
     </div>
   </div>
 
   <script>
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
     // SABITLER & DURUM
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
     const STORAGE_THEME = 'our_space_theme_v2';
     const STORAGE_ACTIVE_ROOM = 'our_space_active_room_v3';
     const STORAGE_ACTIVE_PIN  = 'our_space_active_pin_v3';
@@ -372,15 +372,15 @@
     let bucketItems = [];
     let currentSong = { title:'', url:'', who:'', type:'' };
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
     // TEMA
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
     function changeTheme(theme) {
       document.body.setAttribute('data-theme', theme);
       localStorage.setItem(STORAGE_THEME, theme);
       const sel = document.getElementById('theme-selector');
       if (sel) sel.value = theme;
-      // TemayÄ± diÄŸer cihaza da yansÄ±t
+      // Temayı diğer cihaza da yansıt
       if (currentRoom) currentRoom.get('theme').put(theme);
     }
     function initTheme() {
@@ -388,9 +388,9 @@
       changeTheme(saved);
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-    // HASH (Åifre gÃ¼venliÄŸi)
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
+    // HASH (Şifre güvenliği)
+    // ═══════════════════════════════════════════
     async function hashPin(pin) {
       const str = (pin||'') + '_ourspace_v3_salt_2026';
       if (window.crypto && crypto.subtle) {
@@ -404,9 +404,9 @@
       return 'h_' + (h>>>0).toString(16);
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-    // GÄ°RÄ°Å EKRANI
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
+    // GİRİŞ EKRANI
+    // ═══════════════════════════════════════════
     function showAuthTab(tab) {
       const c = document.getElementById('auth-create-section');
       const j = document.getElementById('auth-join-section');
@@ -429,7 +429,7 @@
       document.getElementById('create-room-code').value = 'LOVE-' + Math.floor(100000+Math.random()*900000);
     }
 
-    // URL Magic Link KontrolÃ¼ (?join=KOD&pin=SIFRE)
+    // URL Magic Link Kontrolü (?join=KOD&pin=SIFRE)
     function checkUrlForMagicLink() {
       const p = new URLSearchParams(window.location.search);
       const code = p.get('join') || p.get('code');
@@ -456,7 +456,7 @@
       }
     }
 
-    // ALAN OLUÅTUR
+    // ALAN OLUŞTUR
     async function createProtectedRoom() {
       const code = document.getElementById('create-room-code').value.trim().toUpperCase();
       const pin  = document.getElementById('create-room-pin').value.trim();
@@ -477,8 +477,8 @@
           if (data.pinHash === pHash) {
             doCreate(code, pin, pHash, authNode, btn); // Zaten senin odana
           } else {
-            alert(`âš ï¸ Bu kod (${code}) zaten baÅŸka biri tarafÄ±ndan alÄ±nmÄ±ÅŸ ve kilitlenmiÅŸ!\n\nFarklÄ± bir kod veya tarih dene.`);
-            btn.textContent = 'AlanÄ± OluÅŸtur ve Kilitle âœ§'; btn.disabled = false;
+            alert(`⚠️ Bu kod (${code}) zaten başka biri tarafından alınmış ve kilitlenmiş!\n\nFarklı bir kod veya tarih dene.`);
+            btn.textContent = 'Alanı Oluştur ve Kilitle ✧'; btn.disabled = false;
           }
         } else {
           doCreate(code, pin, pHash, authNode, btn);
@@ -492,7 +492,7 @@
       document.getElementById('created-code-display').textContent = code;
       document.getElementById('auth-create-section').style.display = 'none';
       document.getElementById('auth-success-section').style.display = 'flex';
-      if(btn){ btn.textContent='AlanÄ± OluÅŸtur ve Kilitle âœ§'; btn.disabled=false; }
+      if(btn){ btn.textContent='Alanı Oluştur ve Kilitle ✧'; btn.disabled=false; }
     }
 
     function enterNewRoom() {
@@ -503,7 +503,7 @@
       setupCoupleChannel(tempCode, tempPin);
     }
 
-    // ALANA GÄ°R
+    // ALANA GİR
     async function joinProtectedRoom() {
       const code = document.getElementById('join-room-code').value.trim().toUpperCase();
       const pin  = document.getElementById('join-room-pin').value.trim();
@@ -511,7 +511,7 @@
       if (!code) { shake('join-room-code'); return; }
       if (!pin)  { shake('join-room-pin');  return; }
 
-      btn.textContent = 'DoÄŸrulanÄ±yor...'; btn.disabled = true;
+      btn.textContent = 'Doğrulanıyor...'; btn.disabled = true;
       const pHash = await hashPin(pin);
       const authNode = gun.get('our_space_auth_v3_' + encodeURIComponent(code));
       let done = false;
@@ -526,11 +526,11 @@
           } else {
             const el = document.getElementById('join-room-pin');
             el.value = ''; shake('join-room-pin');
-            alert('âŒ HatalÄ± Åifre!\n\nBu alana sadece doÄŸru ÅŸifreyi bilen Ã§ift girebilir.');
-            btn.textContent='ğŸ—ï¸ Alana Gir âœ§'; btn.disabled=false;
+            alert('❌ Hatalı Şifre!\n\nBu alana sadece doğru şifreyi bilen çift girebilir.');
+            btn.textContent='🗝️ Alana Gir ✧'; btn.disabled=false;
           }
         } else {
-          // AÄŸda kayÄ±t yoksa ilk aÃ§Ä±lÄ±ÅŸ olarak kabul et
+          // Ağda kayıt yoksa ilk açılış olarak kabul et
           authNode.put({ claimed:true, code, pinHash:pHash, at:Date.now() });
           completeJoin(code, pin, btn);
         }
@@ -542,7 +542,7 @@
       localStorage.setItem(STORAGE_ACTIVE_PIN,  pin);
       document.getElementById('room-lock-overlay').classList.add('hidden');
       setupCoupleChannel(code, pin);
-      if(btn){ btn.textContent='ğŸ—ï¸ Alana Gir âœ§'; btn.disabled=false; }
+      if(btn){ btn.textContent='🗝️ Alana Gir ✧'; btn.disabled=false; }
     }
 
     function shake(id) {
@@ -554,19 +554,19 @@
       el.focus();
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-    // DAVET LÄ°NKÄ° (WhatsApp Magic Link)
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
+    // DAVET LİNKİ (WhatsApp Magic Link)
+    // ═══════════════════════════════════════════
     function copyInviteLink() {
       const code = tempCode || activeRoomKey;
       const pin  = tempPin  || activePin || localStorage.getItem(STORAGE_ACTIVE_PIN) || '';
       if (!code) return;
       const pinParam = pin ? `&pin=${encodeURIComponent(pin)}` : '';
       const link = `${location.origin}${location.pathname}?join=${encodeURIComponent(code)}${pinParam}`;
-      const msg  = `Bizim Ã¶zel alanÄ±mÄ±z hazÄ±r âœ§ TÄ±kla ve doÄŸrudan gir:\n${link}`;
+      const msg  = `Bizim özel alanımız hazır ✧ Tıkla ve doğrudan gir:\n${link}`;
       navigator.clipboard.writeText(msg)
-        .then(() => alert('âœ§ WhatsApp davet linki kopyalandÄ±! Sevgiline gÃ¶nder â€” tÄ±kladÄ±ÄŸÄ±nda ÅŸifre girmeden tek tÄ±kla aÃ§Ä±lÄ±r.'))
-        .catch(() => prompt('Davet linkini kopyalayÄ±p sevgiline atabilirsin:', msg));
+        .then(() => alert('✧ WhatsApp davet linki kopyalandı! Sevgiline gönder — tıkladığında şifre girmeden tek tıkla açılır.'))
+        .catch(() => prompt('Davet linkini kopyalayıp sevgiline atabilirsin:', msg));
     }
 
     function shareSpaceCode() {
@@ -574,22 +574,22 @@
       const pin  = activePin || localStorage.getItem(STORAGE_ACTIVE_PIN) || '';
       const pinParam = pin ? `&pin=${encodeURIComponent(pin)}` : '';
       const link = `${location.origin}${location.pathname}?join=${encodeURIComponent(activeRoomKey)}${pinParam}`;
-      navigator.clipboard.writeText(`Bizim Ã¶zel alanÄ±mÄ±z:\n${link}`)
-        .then(() => alert('âœ§ Davet linki kopyalandÄ±!'))
+      navigator.clipboard.writeText(`Bizim özel alanımız:\n${link}`)
+        .then(() => alert('✧ Davet linki kopyalandı!'))
         .catch(() => prompt('Davet linkiniz:', link));
     }
 
     function logoutRoom() {
-      if (confirm('Bu alandan Ã§Ä±kmak istiyor musunuz?\nAynÄ± kod ve ÅŸifrenizle her zaman tekrar girebilirsiniz.')) {
+      if (confirm('Bu alandan çıkmak istiyor musunuz?\nAynı kod ve şifrenizle her zaman tekrar girebilirsiniz.')) {
         localStorage.removeItem(STORAGE_ACTIVE_ROOM);
         localStorage.removeItem(STORAGE_ACTIVE_PIN);
         location.reload();
       }
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-    // KANAL BAÄLANTISI (GunDB â€” Åifreli Kasa)
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
+    // KANAL BAĞLANTISI (GunDB — Şifreli Kasa)
+    // ═══════════════════════════════════════════
     async function setupCoupleChannel(roomCode, pin) {
       activeRoomKey = roomCode;
       activePin = pin || localStorage.getItem(STORAGE_ACTIVE_PIN) || '';
@@ -599,7 +599,7 @@
       const vaultKey = 'our_space_vault_v4_' + encodeURIComponent(roomCode) + '_' + pHash.substring(0, 16);
       currentRoom = gun.get(vaultKey);
 
-      // GerÃ§ek zamanlÄ± sync â€” her cihazda anÄ±nda yansÄ±r
+      // Gerçek zamanlı sync — her cihazda anında yansır
       currentRoom.get('live_payload').on(data => {
         if (!data) return;
         try {
@@ -650,9 +650,9 @@
       renderLoveNotes(); renderMemories(); renderBucket(); updateSongBar(); updateCounterDisplay(anniv);
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
     // SEKMELER
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
     function switchTab(name) {
       document.querySelectorAll('.pill-tab').forEach(b=>b.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
@@ -662,14 +662,14 @@
       document.getElementById(map[name]).classList.add('active');
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
     // 1. SANA NOTUM
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
     function addLoveNote() {
       const inp = document.getElementById('love-note-text');
       const text = inp.value.trim();
       if (!text) return;
-      const time = new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'}) + ' â€¢ ' +
+      const time = new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'}) + ' • ' +
                    new Date().toLocaleDateString('tr-TR',{day:'numeric',month:'short'});
       loveNotes.unshift({ id: Date.now(), text, time });
       inp.value = '';
@@ -683,7 +683,7 @@
       const c = document.getElementById('love-notes-container');
       document.getElementById('love-count').textContent = loveNotes.length;
       if (!loveNotes.length) {
-        c.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:30px;">Ona gÃ¼nÃ¼n ilk tatlÄ± notunu bÄ±rakÄ±n ğŸ’Œ</div>`;
+        c.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:30px;">Ona günün ilk tatlı notunu bırakın 💌</div>`;
         return;
       }
       c.innerHTML = loveNotes.map(n => `
@@ -692,14 +692,14 @@
           <div style="font-size:0.95rem;line-height:1.55;white-space:pre-wrap;margin-bottom:12px;">${esc(n.text)}</div>
           <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.72rem;color:var(--text-muted);border-top:1px solid rgba(255,255,255,0.05);padding-top:8px;">
             <span>${n.time}</span>
-            <button class="btn" style="padding:2px 6px;font-size:0.65rem;" onclick="deleteLoveNote(${n.id})">âœ•</button>
+            <button class="btn" style="padding:2px 6px;font-size:0.65rem;" onclick="deleteLoveNote(${n.id})">✕</button>
           </div>
         </div>`).join('');
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
     // 2. ANILARIMIZ
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
     function addMemory() {
       const title = document.getElementById('memory-title-input').value.trim();
       const body  = document.getElementById('memory-body-input').value.trim();
@@ -712,7 +712,7 @@
       syncToCloud(); renderMemories();
     }
     function deleteMemory(id) {
-      if (confirm('Bu anÄ±yÄ± silmek istediÄŸinizden emin misiniz?')) {
+      if (confirm('Bu anıyı silmek istediğinizden emin misiniz?')) {
         memories = memories.filter(m=>m.id!==id);
         syncToCloud(); renderMemories();
       }
@@ -721,23 +721,23 @@
       const c = document.getElementById('memories-container');
       document.getElementById('memory-count').textContent = memories.length;
       if (!memories.length) {
-        c.innerHTML = `<div style="text-align:center;color:var(--text-muted);padding:40px;font-size:0.9rem;">âœ§ Birlikte ilk anÄ±nÄ±zÄ± ekleyin âœ§</div>`;
+        c.innerHTML = `<div style="text-align:center;color:var(--text-muted);padding:40px;font-size:0.9rem;">✧ Birlikte ilk anınızı ekleyin ✧</div>`;
         return;
       }
       c.innerHTML = memories.map(m => `
         <div class="memory-card glass">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-            <div style="font-size:1.1rem;font-weight:600;color:var(--accent);">${esc(m.title||'Ã–zel Bir GÃ¼n')}</div>
-            <button class="btn" style="padding:2px 7px;font-size:0.7rem;" onclick="deleteMemory(${m.id})">âœ•</button>
+            <div style="font-size:1.1rem;font-weight:600;color:var(--accent);">${esc(m.title||'Özel Bir Gün')}</div>
+            <button class="btn" style="padding:2px 7px;font-size:0.7rem;" onclick="deleteMemory(${m.id})">✕</button>
           </div>
-          <div style="font-size:0.75rem;color:var(--text-muted);">ğŸ“… ${m.date}</div>
+          <div style="font-size:0.75rem;color:var(--text-muted);">📅 ${m.date}</div>
           <div style="font-size:0.95rem;line-height:1.6;white-space:pre-wrap;word-break:break-word;">${esc(m.body)}</div>
         </div>`).join('');
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-    // 3. BÄ°RLÄ°KTE YAPILACAKLAR
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
+    // 3. BİRLİKTE YAPILACAKLAR
+    // ═══════════════════════════════════════════
     function addBucketItem() {
       const inp = document.getElementById('new-bucket-text');
       const text = inp.value.trim();
@@ -758,7 +758,7 @@
       const c = document.getElementById('bucket-container');
       document.getElementById('bucket-count').textContent = bucketItems.filter(b=>!b.completed).length;
       if (!bucketItems.length) {
-        c.innerHTML = `<div style="text-align:center;color:var(--text-muted);padding:30px;">Birlikte yapÄ±lacaklar listeniz boÅŸ âœ§</div>`;
+        c.innerHTML = `<div style="text-align:center;color:var(--text-muted);padding:30px;">Birlikte yapılacaklar listeniz boş ✧</div>`;
         return;
       }
       c.innerHTML = bucketItems.map(b => `
@@ -767,13 +767,13 @@
             <input type="checkbox" ${b.completed?'checked':''} onchange="toggleBucket(${b.id})">
             <span>${esc(b.text)}</span>
           </div>
-          <button class="btn" style="padding:3px 8px;font-size:0.7rem;" onclick="deleteBucket(${b.id})">âœ•</button>
+          <button class="btn" style="padding:3px 8px;font-size:0.7rem;" onclick="deleteBucket(${b.id})">✕</button>
         </div>`).join('');
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-    // ğŸµ ÅARKI (YouTube + Spotify Embed & Sync)
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
+    // 🎵 ŞARKI (YouTube + Spotify Embed & Sync)
+    // ═══════════════════════════════════════════
     function detectSongType(input) {
       if (input.includes('youtube.com/watch') || input.includes('youtu.be/')) return 'youtube';
       if (input.includes('spotify.com/track')) return 'spotify';
@@ -801,7 +801,7 @@
       document.getElementById('song-modal').classList.remove('active');
     }
 
-    // CanlÄ± Ã¶nizleme
+    // Canlı önizleme
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('modal-song-name').addEventListener('input', function() {
         const v = this.value.trim();
@@ -839,10 +839,10 @@
       if (type === 'youtube') {
         url   = rawInput;
         const vid = getYoutubeId(rawInput);
-        title = vid ? `YouTube ÅarkÄ±sÄ±` : 'GÃ¼nÃ¼n ÅarkÄ±sÄ±';
+        title = vid ? `YouTube Şarkısı` : 'Günün Şarkısı';
       } else if (type === 'spotify' || type === 'spotify_other') {
         url   = rawInput;
-        title = 'Spotify ÅarkÄ±sÄ±';
+        title = 'Spotify Şarkısı';
       } else {
         url   = `https://open.spotify.com/search/${encodeURIComponent(rawInput)}`;
         title = rawInput;
@@ -861,34 +861,34 @@
 
       if (currentSong && currentSong.title) {
         titleEl.textContent = currentSong.title;
-        subEl.textContent   = currentSong.who ? `ğŸ’¿ Ã–neren: ${currentSong.who}` : 'ğŸ’¿ GÃ¼nÃ¼n ÅarkÄ±sÄ±';
+        subEl.textContent   = currentSong.who ? `💿 Öneren: ${currentSong.who}` : '💿 Günün Şarkısı';
         if (currentSong.url) {
           btn.href         = currentSong.url;
           btn.style.display = 'inline-flex';
-          btn.textContent  = currentSong.type === 'youtube' ? 'â–¶ YouTube' :
-                             currentSong.type === 'spotify' ? 'â–¶ Spotify' : 'â–¶ Dinle';
+          btn.textContent  = currentSong.type === 'youtube' ? '▶ YouTube' :
+                             currentSong.type === 'spotify' ? '▶ Spotify' : '▶ Dinle';
         } else {
           btn.style.display = 'none';
         }
       } else {
-        titleEl.textContent = 'HenÃ¼z bir ÅŸarkÄ± Ã¶nerilmedi';
-        subEl.textContent   = 'GÃ¼nÃ¼n ÅŸarkÄ±sÄ±nÄ± belirlemek iÃ§in tÄ±kla';
+        titleEl.textContent = 'Henüz bir şarkı önerilmedi';
+        subEl.textContent   = 'Günün şarkısını belirlemek için tıkla';
         btn.style.display   = 'none';
       }
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-    // SAYAÃ‡
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
+    // SAYAÇ
+    // ═══════════════════════════════════════════
     function updateCounterDisplay(dateStr) {
       const el = document.getElementById('counter-days');
-      if (!dateStr) { el.textContent = 'tarih seÃ§'; return; }
+      if (!dateStr) { el.textContent = 'tarih seç'; return; }
       const diff = Math.ceil(Math.abs(new Date() - new Date(dateStr)) / (1000*60*60*24));
-      el.textContent = `${diff}. gÃ¼n`;
+      el.textContent = `${diff}. gün`;
     }
     function setAnniversaryDate() {
       const cur = (activeRoomKey ? localStorage.getItem('anniv_'+activeRoomKey) : '') || '2024-01-01';
-      const nd  = prompt('Ä°liÅŸkinizin baÅŸlangÄ±Ã§ tarihi (YÄ±l-Ay-GÃ¼n, Ã–rn: 2023-08-15):', cur);
+      const nd  = prompt('İlişkinizin başlangıç tarihi (Yıl-Ay-Gün, Örn: 2023-08-15):', cur);
       if (nd && !isNaN(Date.parse(nd))) {
         if (activeRoomKey) localStorage.setItem('anniv_'+activeRoomKey, nd);
         updateCounterDisplay(nd);
@@ -896,9 +896,9 @@
       }
     }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
     // YEDEK
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
     function exportData() {
       const b = { room:activeRoomKey, loveNotes, memories, bucketItems, currentSong,
                   date: activeRoomKey?localStorage.getItem('anniv_'+activeRoomKey):'' };
@@ -910,9 +910,9 @@
 
     function esc(t) { const d=document.createElement('div'); d.textContent=t; return d.innerHTML; }
 
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-    // BAÅLAT
-    // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    // ═══════════════════════════════════════════
+    // BAŞLAT
+    // ═══════════════════════════════════════════
     initTheme();
     checkRoomOnLoad();
     document.getElementById('memory-date-input').valueAsDate = new Date();

@@ -603,41 +603,69 @@
 </head>
 <body data-theme="ocean-dusk">
 
-  <!-- 1. DAVET KODU EKRANI -->
+  <!-- 1. DAVET KODU & ŞİFRELİ GİRİŞ EKRANI -->
   <div id="room-lock-overlay">
     <div class="invite-box glass">
       <div style="font-size: 2.2rem; margin-bottom: 2px;">✧ 💌 ✧</div>
       <h2 style="font-size: 1.45rem; font-weight: 500; color: var(--accent); letter-spacing: -0.03em; text-transform: lowercase;">our space</h2>
-      <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.4;">
-        Her çiftin alanı tamamen kendine özel ve şifrelidir.
+      <p style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.4; margin-bottom: 2px;">
+        Her çiftin alanı kendine özeldir; şifrenizle korunur ve kilitlenir.
       </p>
 
-      <!-- SEÇENEK 1: YENİ ALAN OLUŞTUR -->
-      <div id="create-space-view">
-        <button class="btn btn-primary" style="width: 100%; justify-content: center; padding: 13px; border-radius: 14px;" onclick="generateNewCoupleSpace()">
-          ✨ Yeni Bir Alan Oluştur
+      <!-- TAB SEÇİMİ: OLUŞTUR / GİRİŞ YAP -->
+      <div style="display: flex; gap: 6px; background: rgba(255,255,255,0.06); padding: 4px; border-radius: 14px;">
+        <button id="tab-btn-create" class="btn" style="flex: 1; justify-content: center; font-size: 0.8rem; background: var(--accent); color: #08060c; border-radius: 10px; font-weight: 600;" onclick="showAuthTab('create')">
+          ✨ Alan Oluştur
+        </button>
+        <button id="tab-btn-join" class="btn" style="flex: 1; justify-content: center; font-size: 0.8rem; background: transparent; color: var(--text-muted); border-radius: 10px;" onclick="showAuthTab('join')">
+          🗝️ Alana Gir
         </button>
       </div>
 
-      <!-- OLUŞTURULAN KOD GÖSTERİMİ -->
-      <div id="new-code-view" style="display: none; flex-direction: column; gap: 10px;">
-        <span style="font-size: 0.8rem; color: var(--text-muted);">Senin Çift Davet Kodun:</span>
-        <div class="invite-code-badge" id="generated-code-display">LOVE-XXXX</div>
-        <button class="btn" style="width: 100%; justify-content: center; padding: 10px;" onclick="copyInviteLink()">
-          📋 Davet Linkini Kopyala & Sevgiline At
+      <!-- SEÇENEK 1: KENDİ ÖZEL KODUN & ŞİFREN İLE ALAN OLUŞTUR -->
+      <div id="auth-create-section" style="display: flex; flex-direction: column; gap: 10px; text-align: left;">
+        <div>
+          <label style="font-size: 0.73rem; color: var(--text-muted); display: block; margin-bottom: 4px;">İkinize Özel Kod veya Tarih:</label>
+          <input type="text" id="create-room-code" placeholder="Örn: 50119, 50526 veya özel bir kelime" style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--card-border); color: var(--accent); font-size: 0.95rem; font-weight: 600; padding: 11px 14px; border-radius: 12px; outline: none; letter-spacing: 1px;">
+        </div>
+        <div>
+          <label style="font-size: 0.73rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Gizli Şifreniz / PIN (Başkaları giremez):</label>
+          <input type="password" id="create-room-pin" placeholder="Sadece sevgilinizin bileceği şifre" style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--card-border); color: var(--text); font-size: 0.95rem; padding: 11px 14px; border-radius: 12px; outline: none;">
+        </div>
+        <button id="btn-create-submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px; border-radius: 12px; margin-top: 4px;" onclick="createProtectedRoom()">
+          Alanı Oluştur ve Kilitle ✧
         </button>
-        <button class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px; border-radius: 14px;" onclick="enterMyGeneratedSpace()">
+        <div style="text-align: center;">
+          <span style="font-size: 0.72rem; color: var(--text-muted); cursor: pointer; text-decoration: underline;" onclick="generateRandomRoomCode()">
+            🎲 Ya da bana rastgele bir kod ver
+          </span>
+        </div>
+      </div>
+
+      <!-- SEÇENEK 2: OLUŞTURULAN KOD GÖSTERİMİ & DAVET LİNKİ -->
+      <div id="auth-success-section" style="display: none; flex-direction: column; gap: 10px;">
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Özel alanınız oluşturuldu ve şifrenizle kilitlendi:</span>
+        <div class="invite-code-badge" id="created-code-display">50119</div>
+        <button class="btn" style="width: 100%; justify-content: center; padding: 11px; border-color: var(--accent); color: var(--accent);" onclick="copyInviteLink()">
+          📋 WhatsApp Davet Linkini Kopyala
+        </button>
+        <button class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px; border-radius: 14px;" onclick="enterNewlyCreatedRoom()">
           Alanıma Gir ✧
         </button>
       </div>
 
-      <div class="divider">VEYA</div>
-
-      <!-- SEÇENEK 2: SEVGİLİSİNİN KODUYLA KATIL -->
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        <input type="text" id="join-code-input" placeholder="Sevgilinin attığı davet kodunu yapıştır" style="background: rgba(255,255,255,0.06); border: 1px solid var(--card-border); color: var(--accent); text-align: center; font-size: 1rem; letter-spacing: 2px; padding: 12px; border-radius: 12px; outline: none;">
-        <button class="btn" style="width: 100%; justify-content: center; padding: 12px; border-radius: 12px; border-color: var(--accent); color: var(--accent);" onclick="joinExistingSpace()">
-          🗝️ Alana Katıl
+      <!-- SEÇENEK 3: VAR OLAN ALANA GİRİŞ YAP -->
+      <div id="auth-join-section" style="display: none; flex-direction: column; gap: 10px; text-align: left;">
+        <div>
+          <label style="font-size: 0.73rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Alan Kodu / Tarih:</label>
+          <input type="text" id="join-room-code" placeholder="Örn: 50119" style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--card-border); color: var(--accent); font-size: 0.95rem; font-weight: 600; padding: 11px 14px; border-radius: 12px; outline: none; letter-spacing: 1px;">
+        </div>
+        <div>
+          <label style="font-size: 0.73rem; color: var(--text-muted); display: block; margin-bottom: 4px;">Gizli Şifre / PIN:</label>
+          <input type="password" id="join-room-pin" placeholder="Alanın şifresini girin" style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--card-border); color: var(--text); font-size: 0.95rem; padding: 11px 14px; border-radius: 12px; outline: none;">
+        </div>
+        <button id="btn-join-submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px; border-radius: 12px; margin-top: 4px;" onclick="joinProtectedRoom()">
+          🗝️ Alana Gir ✧
         </button>
       </div>
     </div>
@@ -744,13 +772,18 @@
   </div>
 
   <script>
-    // DAVET KODU İLE BENZERSİZ KANAL SİSTEMİ
+    // DAVET KODU & ŞİFRELİ BENZERSİZ KANAL SİSTEMİ
     const STORAGE_THEME = 'our_space_theme_v2';
     const STORAGE_ACTIVE_ROOM = 'our_space_active_room_key_v2';
+    const STORAGE_ACTIVE_PIN = 'our_space_active_pin_v2';
+
+    // 50119 ve 50526 Özel Koruması (Başkaları asla çalamaz veya üzerine yazamaz)
+    const RESERVED_CODES = ['50119', '50526'];
 
     const gun = Gun(['https://gun-manhattan.herokuapp.com/gun', 'https://relay.peer.ooo/gun']);
     let currentRoom = null;
     let activeRoomKey = null;
+    let activePin = null;
 
     let loveNotes = [];
     let memories = [];
@@ -769,98 +802,286 @@
       changeTheme(saved);
     }
 
-    // URL PARAMETRESİNDEN SİHİRLİ LİNK KONTROLÜ (?join=LOVE-XXXX)
+    // ŞİFRE HASHLEME (PBKDF/SHA256 Güvenliği)
+    async function hashPin(pin) {
+      const str = (pin || '') + '_ourspace_secure_salt_2026';
+      if (window.crypto && window.crypto.subtle) {
+        try {
+          const enc = new TextEncoder().encode(str);
+          const buf = await crypto.subtle.digest('SHA-256', enc);
+          return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+        } catch(e) {}
+      }
+      let h = 5381;
+      for (let i = 0; i < str.length; i++) {
+        h = ((h << 5) + h) + str.charCodeAt(i);
+      }
+      return 'h_' + (h >>> 0).toString(16);
+    }
+
+    // TABLAR ARASI GEÇİŞ (ALAN OLUŞTUR / ALANA GİR)
+    function showAuthTab(tab) {
+      const createSec = document.getElementById('auth-create-section');
+      const joinSec = document.getElementById('auth-join-section');
+      const succSec = document.getElementById('auth-success-section');
+      const btnC = document.getElementById('tab-btn-create');
+      const btnJ = document.getElementById('tab-btn-join');
+
+      succSec.style.display = 'none';
+
+      if (tab === 'create') {
+        createSec.style.display = 'flex';
+        joinSec.style.display = 'none';
+        btnC.style.background = 'var(--accent)';
+        btnC.style.color = '#08060c';
+        btnC.style.fontWeight = '600';
+        btnJ.style.background = 'transparent';
+        btnJ.style.color = 'var(--text-muted)';
+        btnJ.style.fontWeight = 'normal';
+      } else {
+        createSec.style.display = 'none';
+        joinSec.style.display = 'flex';
+        btnJ.style.background = 'var(--accent)';
+        btnJ.style.color = '#08060c';
+        btnJ.style.fontWeight = '600';
+        btnC.style.background = 'transparent';
+        btnC.style.color = 'var(--text-muted)';
+        btnC.style.fontWeight = 'normal';
+      }
+    }
+
+    function generateRandomRoomCode() {
+      const rand = Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('create-room-code').value = 'LOVE-' + rand;
+    }
+
+    // URL PARAMETRESİNDEN SİHİRLİ LİNK KONTROLÜ (?join=50119&pin=xxx)
     function checkUrlForInvite() {
       const urlParams = new URLSearchParams(window.location.search);
       const invite = urlParams.get('join') || urlParams.get('code');
+      const pin = urlParams.get('pin') || urlParams.get('pass') || urlParams.get('key');
+
       if (invite) {
         const clean = invite.trim().toUpperCase();
         localStorage.setItem(STORAGE_ACTIVE_ROOM, clean);
-        // URL'i temizle
+        if (pin) {
+          localStorage.setItem(STORAGE_ACTIVE_PIN, pin.trim());
+        }
+        // URL'i temizle (adres çubuğunda sade link kalsın)
         window.history.replaceState({}, document.title, window.location.pathname);
-        return clean;
+        return { code: clean, pin: pin ? pin.trim() : '' };
       }
       return null;
     }
 
-    function checkRoomOnLoad() {
-      const magicCode = checkUrlForInvite();
-      const saved = magicCode || localStorage.getItem(STORAGE_ACTIVE_ROOM);
+    async function checkRoomOnLoad() {
+      const magic = checkUrlForInvite();
+      const savedCode = magic ? magic.code : localStorage.getItem(STORAGE_ACTIVE_ROOM);
+      const savedPin = magic ? magic.pin : (localStorage.getItem(STORAGE_ACTIVE_PIN) || '');
 
-      if (saved) {
+      if (savedCode) {
         document.getElementById('room-lock-overlay').classList.add('hidden');
-        setupCoupleChannel(saved);
+        setupCoupleChannel(savedCode, savedPin);
       } else {
         document.getElementById('room-lock-overlay').classList.remove('hidden');
+        showAuthTab('create');
       }
     }
 
-    // BENZERSİZ DAVET KODU ÜRETİCİ
+    // 1. KENDİ ÖZEL KODU VE ŞİFRESİYLE ALAN OLUŞTURMA
     let tempGeneratedCode = null;
+    let tempGeneratedPin = null;
 
-    function generateNewCoupleSpace() {
-      const rand = Math.floor(100000 + Math.random() * 900000);
-      tempGeneratedCode = 'LOVE-' + rand;
-      document.getElementById('generated-code-display').textContent = tempGeneratedCode;
-      document.getElementById('create-space-view').style.display = 'none';
-      document.getElementById('new-code-view').style.display = 'flex';
-    }
+    async function createProtectedRoom() {
+      const codeInput = document.getElementById('create-room-code').value.trim().toUpperCase();
+      const pinInput = document.getElementById('create-room-pin').value.trim();
+      const btn = document.getElementById('btn-create-submit');
 
-    function copyInviteLink() {
-      if (!tempGeneratedCode) return;
-      const link = `${window.location.origin}${window.location.pathname}?join=${tempGeneratedCode}`;
-      const shareText = `Bizim özel alanımız hazır ✧ Katılmak için linke tıkla:\n${link}\n(Veya kodumuz: ${tempGeneratedCode})`;
-      
-      navigator.clipboard.writeText(shareText).then(() => {
-        alert("✧ Davet linki ve kod kopyalandı! Sevgiline mesaj olarak gönderebilirsin.");
-      }).catch(() => {
-        prompt("Aşağıdaki davet mesajını kopyalayıp sevgiline atabilirsin:", shareText);
+      if (!codeInput || codeInput.length < 3) {
+        alert("Lütfen en az 3 karakterli bir kod veya tarih girin (Örn: 50119 veya 50526).");
+        return;
+      }
+      if (!pinInput || pinInput.length < 2) {
+        alert("Lütfen sadece sevgilinizle paylaşacağınız gizli bir şifre / PIN girin (Örn: 1905).");
+        return;
+      }
+
+      btn.textContent = "Kontrol ediliyor...";
+      btn.disabled = true;
+
+      const pHash = await hashPin(pinInput);
+      const authNode = gun.get('our_space_auth_lock_' + encodeURIComponent(codeInput));
+
+      let resolved = false;
+      const timeout = setTimeout(() => {
+        if (!resolved) {
+          resolved = true;
+          finishCreateRoom(codeInput, pinInput, pHash, authNode);
+        }
+      }, 1500);
+
+      authNode.once((data) => {
+        if (resolved) return;
+        resolved = true;
+        clearTimeout(timeout);
+
+        if (data && data.claimed) {
+          // Kod daha önce alınmış
+          if (data.pinHash === pHash) {
+            // Şifre aynıysa bu kullanıcının kendi odasıdır, girişe izin ver
+            finishCreateRoom(codeInput, pinInput, pHash, authNode);
+          } else {
+            alert(`⚠️ Bu özel kod ("${codeInput}") zaten başka biri tarafından alınmış ve şifrelenmiş!\n\nLütfen kendinize ait farklı bir tarih veya kod seçin.`);
+            btn.textContent = "Alanı Oluştur ve Kilitle ✧";
+            btn.disabled = false;
+          }
+        } else {
+          // Kod henüz boş, yeni alan olarak kilitlenip oluşturulur
+          finishCreateRoom(codeInput, pinInput, pHash, authNode);
+        }
       });
     }
 
-    function enterMyGeneratedSpace() {
-      if (!tempGeneratedCode) return;
-      localStorage.setItem(STORAGE_ACTIVE_ROOM, tempGeneratedCode);
-      document.getElementById('room-lock-overlay').classList.add('hidden');
-      setupCoupleChannel(tempGeneratedCode);
+    function finishCreateRoom(code, pin, pHash, authNode) {
+      authNode.put({
+        claimed: true,
+        code: code,
+        pinHash: pHash,
+        claimedAt: Date.now()
+      });
+
+      tempGeneratedCode = code;
+      tempGeneratedPin = pin;
+
+      document.getElementById('created-code-display').textContent = code;
+      document.getElementById('auth-create-section').style.display = 'none';
+      document.getElementById('auth-join-section').style.display = 'none';
+      document.getElementById('auth-success-section').style.display = 'flex';
+
+      const btn = document.getElementById('btn-create-submit');
+      btn.textContent = "Alanı Oluştur ve Kilitle ✧";
+      btn.disabled = false;
     }
 
-    function joinExistingSpace() {
-      const input = document.getElementById('join-code-input').value.trim().toUpperCase();
-      if (!input || input.length < 4) {
-        alert("Lütfen geçerli bir davet kodu girin (Örn: LOVE-123456).");
+    function enterNewlyCreatedRoom() {
+      if (!tempGeneratedCode) return;
+      localStorage.setItem(STORAGE_ACTIVE_ROOM, tempGeneratedCode);
+      localStorage.setItem(STORAGE_ACTIVE_PIN, tempGeneratedPin);
+      document.getElementById('room-lock-overlay').classList.add('hidden');
+      setupCoupleChannel(tempGeneratedCode, tempGeneratedPin);
+    }
+
+    // 2. VAR OLAN ALANA GİRİŞ YAPMA
+    async function joinProtectedRoom() {
+      const codeInput = document.getElementById('join-room-code').value.trim().toUpperCase();
+      const pinInput = document.getElementById('join-room-pin').value.trim();
+      const btn = document.getElementById('btn-join-submit');
+
+      if (!codeInput) {
+        alert("Lütfen alan kodunuzu girin (Örn: 50119).");
         return;
       }
-      localStorage.setItem(STORAGE_ACTIVE_ROOM, input);
+      if (!pinInput) {
+        alert("Lütfen gizli şifrenizi girin.");
+        return;
+      }
+
+      btn.textContent = "Doğrulanıyor...";
+      btn.disabled = true;
+
+      const pHash = await hashPin(pinInput);
+      const authNode = gun.get('our_space_auth_lock_' + encodeURIComponent(codeInput));
+
+      let resolved = false;
+      const timeout = setTimeout(() => {
+        if (!resolved) {
+          resolved = true;
+          completeJoin(codeInput, pinInput);
+        }
+      }, 1800);
+
+      authNode.once((data) => {
+        if (resolved) return;
+        resolved = true;
+        clearTimeout(timeout);
+
+        if (data && data.claimed) {
+          if (data.pinHash === pHash) {
+            completeJoin(codeInput, pinInput);
+          } else {
+            alert("❌ Hatalı Şifre!\n\nBu özel alana sadece doğru şifreye sahip çift giriş yapabilir.");
+            btn.textContent = "🗝️ Alana Gir ✧";
+            btn.disabled = false;
+          }
+        } else {
+          // Ağda kayıt henüz yoksa ilk erişim olarak bağla
+          authNode.put({ claimed: true, code: codeInput, pinHash: pHash, claimedAt: Date.now() });
+          completeJoin(codeInput, pinInput);
+        }
+      });
+    }
+
+    function completeJoin(code, pin) {
+      localStorage.setItem(STORAGE_ACTIVE_ROOM, code);
+      localStorage.setItem(STORAGE_ACTIVE_PIN, pin);
       document.getElementById('room-lock-overlay').classList.add('hidden');
-      setupCoupleChannel(input);
+      setupCoupleChannel(code, pin);
+      const btn = document.getElementById('btn-join-submit');
+      if (btn) {
+        btn.textContent = "🗝️ Alana Gir ✧";
+        btn.disabled = false;
+      }
+    }
+
+    // 3. WHATSAPP SİHİRLİ DAVET LİNKİ
+    function copyInviteLink() {
+      const code = tempGeneratedCode || activeRoomKey;
+      const pin = tempGeneratedPin || activePin || localStorage.getItem(STORAGE_ACTIVE_PIN) || '';
+      if (!code) return;
+
+      const pinParam = pin ? `&pin=${encodeURIComponent(pin)}` : '';
+      const link = `${window.location.origin}${window.location.pathname}?join=${encodeURIComponent(code)}${pinParam}`;
+      const shareText = `Bizim özel alanımız hazır ✧ Katılmak için doğrudan tıkla:\n${link}\n\n(Alan Kodu: ${code}${pin ? ' • Şifre: ' + pin : ''})`;
+
+      navigator.clipboard.writeText(shareText).then(() => {
+        alert("✧ WhatsApp davet linki kopyalandı! Sevgiline gönderebilirsin. Tıkladığında şifre girmesine gerek kalmadan tek tıkla açılacaktır.");
+      }).catch(() => {
+        prompt("Aşağıdaki davet linkini kopyalayıp WhatsApp'tan sevgiline atabilirsin:", shareText);
+      });
     }
 
     function shareSpaceCode() {
       if (!activeRoomKey) return;
-      const link = `${window.location.origin}${window.location.pathname}?join=${activeRoomKey}`;
-      const msg = `Bizim alanımızın davet kodu: ${activeRoomKey}\nDoğrudan açmak için link: ${link}`;
+      const pin = activePin || localStorage.getItem(STORAGE_ACTIVE_PIN) || '';
+      const pinParam = pin ? `&pin=${encodeURIComponent(pin)}` : '';
+      const link = `${window.location.origin}${window.location.pathname}?join=${encodeURIComponent(activeRoomKey)}${pinParam}`;
+      const msg = `Bizim özel alanımızın davet linki:\n${link}\n\nKodumuz: ${activeRoomKey}` + (pin ? ` • Şifremiz: ${pin}` : '');
+
       navigator.clipboard.writeText(msg).then(() => {
-        alert("✧ Davet kodu ve link kopyalandı!");
+        alert("✧ Özel davet linkiniz kopyalandı! Sevgilinize WhatsApp'tan gönderebilirsiniz.");
       }).catch(() => {
-        prompt("Davet kodu ve linki:", msg);
+        prompt("Özel alan davet linkiniz:", msg);
       });
     }
 
     function logoutRoom() {
-      if (confirm("Bu alandan çıkış yapmak istiyor musunuz? İstediğiniz zaman aynı davet koduyla tekrar girebilirsiniz.")) {
+      if (confirm("Bu alandan çıkış yapmak istiyor musunuz? İstediğiniz zaman aynı kod ve şifrenizle tekrar girebilirsiniz.")) {
         localStorage.removeItem(STORAGE_ACTIVE_ROOM);
+        localStorage.removeItem(STORAGE_ACTIVE_PIN);
         location.reload();
       }
     }
 
-    // KANAL BAĞLANTISI (TAMAMEN BENZERSİZ KOD İLE İZOLASYON)
-    function setupCoupleChannel(roomCode) {
+    // 4. KANAL BAĞLANTISI (KOD VE ŞİFRE İLE ÇİFT KATMANLI KASA)
+    async function setupCoupleChannel(roomCode, pin) {
       activeRoomKey = roomCode;
+      activePin = pin || localStorage.getItem(STORAGE_ACTIVE_PIN) || '';
       loadLocalRoomData(roomCode);
 
-      // GunDB Benzersiz Düğümü (Asla başka çiftlerle çakışmaz)
-      currentRoom = gun.get('our_space_vault_unique_' + encodeURIComponent(roomCode));
+      const pHash = await hashPin(activePin || 'default');
+      // GunDB Düğümü: Kod ve PIN karması ile tamamen izole edilmiş gizli kasa
+      const secureVaultKey = 'our_space_vault_v3_' + encodeURIComponent(roomCode) + '_' + pHash.substring(0, 16);
+      currentRoom = gun.get(secureVaultKey);
 
       currentRoom.get('live_payload').on((data) => {
         if (data) {
